@@ -3,18 +3,18 @@ __author__ = 'taira'
 import socket
 import sys
 
-from Pyside.QtCore import *
-from Pyside.QtGui import *
+#from Pyside.QtCore import *
+#from Pyside.QtGui import *
 
 
-class Client(QWidget):
+class Client(object):
 
     def __init__(self, port, host=socket.gethostname()):
 
-        self.app = QApplication(sys.argv)
-        self.type_label = QLabel("Type:", self)
-        self.type_text_field = QLineEdit(self)
-        self.send_button = QPushButton("Send", self)
+        #self.app = QApplication(sys.argv)
+        #self.type_label = QLabel("Type:", self)
+        #self.type_text_field = QLineEdit(self)
+        #self.send_button = QPushButton("Send", self)
 
         self.sock = socket.socket()
         self._host = str(host)
@@ -28,7 +28,7 @@ class Client(QWidget):
         self.win_width = 400
 
 
-        self.initUI()
+        #self.initUI()
 
     def connect(self):
         self.sock.connect(self.address)
@@ -44,8 +44,6 @@ class Client(QWidget):
         self.sock.send(self.message_to_send.encode())
 
     def communicate(self):
-        self.connect()
-        self.receive()
         self.name = input("Name: ")
 
         while True:
@@ -56,15 +54,15 @@ class Client(QWidget):
             self.message_to_send = self.name + ": " + message
             self.send()
 
-    def initUI(self):
-        QWidget.__init__(self)
-        self.setWindowTitle("chat client")
-        self.setMinimumSize(self.win_width, self.win_height)
-
-        self.type_text_field.setPlaceholderText("Type something...")
-
-        self.show()
-        self.app.exec_()
+    #def initUI(self):
+    #    QWidget.__init__(self)
+    #    self.setWindowTitle("chat client")
+    #    self.setMinimumSize(self.win_width, self.win_height)
+    #
+    #    self.type_text_field.setPlaceholderText("Type something...")
+    #
+    #    self.show()
+    #    self.app.exec_()
 
 
 client = Client(port=5000)
